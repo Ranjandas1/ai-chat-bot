@@ -1,0 +1,54 @@
+<div class="chat-container">
+    <header class="chat-header">
+        <h1>AI Chat Assistant</h1>
+    </header>
+
+    <main class="chat-messages" #scrollContainer>
+        <div class="message-list">
+            @for (message of messages; track message) {
+
+            <div
+                class="message"
+                [class.ai-message]="message.botResponse === 'ai'"
+                [class.user-message]="message.userMessage === 'user'">
+                <div class="message-content">
+                    <div class="user-message">
+                        <b>You</b>
+                         <p>{{ message.userMessage }}</p>
+                    </div>
+                   <div class="ai-message">
+                    <b>Bot</b>
+                    <p>{{ message.botResponse }}</p>
+                    <i>
+                        <span class="timestamp">
+                        {{ message.createdAt | date:'shortTime' }}
+                    </span>
+                    </i>
+                    
+                   </div>
+                    
+                    
+                </div>
+            </div>
+            }
+        </div>
+    </main>
+
+    <footer class="chat-input">
+        <form class="input-form">
+            <input
+                type="text"
+                placeholder="Type your message..."
+                name="userMessage"
+                [(ngModel)]="userMessage"
+                class="message-input" />
+            <button
+                type="button"
+                tabindex="2"
+                (click)="sendMessage()"
+                class="send-button">
+                Send
+            </button>
+        </form>
+    </footer>
+</div>
